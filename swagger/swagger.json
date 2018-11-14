@@ -1,0 +1,261 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Simple KV API",
+        "description": "beego has a very cool tools to autogenerate documents for your API and SimpleKV used it",
+        "version": "1.0.0",
+        "termsOfService": "https://123xe.vn/cms/dieukhoan",
+        "contact": {
+            "email": "thanhnt@123xe.vn"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "basePath": "/v1",
+    "paths": {
+        "/publickv/": {
+            "post": {
+                "tags": [
+                    "publickv"
+                ],
+                "description": "Put key-value to cloud",
+                "operationId": "BigsetKVController.Post",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "sessionID",
+                        "description": "Session ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "appID",
+                        "description": "App ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The KVObject content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.KVObject"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} models.KVObject.Key"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/publickv/get": {
+            "get": {
+                "tags": [
+                    "publickv"
+                ],
+                "description": "find key-value by key",
+                "operationId": "BigsetKVController.Get",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "sessionID",
+                        "description": "Session ID of user/app",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "appID",
+                        "description": "appID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "key",
+                        "description": "the key of kv you want to get",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{simplekv} models.KVObject"
+                    },
+                    "403": {
+                        "description": ": empty object"
+                    }
+                }
+            }
+        },
+        "/publickv/multiget": {
+            "get": {
+                "tags": [
+                    "publickv"
+                ],
+                "description": "find key-value by key",
+                "operationId": "BigsetKVController.MultiGet",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "sessionID",
+                        "description": "Session ID of user/app",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "appID",
+                        "description": "appID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "keys",
+                        "description": "the keys of kv you want to get, saparated by comma,",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{bigsetkv} []models.KVObject"
+                    },
+                    "403": {
+                        "description": ": empty object"
+                    }
+                }
+            }
+        },
+        "/publickv/putitem/{appID}/{pubKey}": {
+            "post": {
+                "tags": [
+                    "publickv"
+                ],
+                "description": "Put key-value to cloud",
+                "operationId": "BigsetKVController.PutItem",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "pubKey",
+                        "description": "Public key in hex",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "appID",
+                        "description": "App ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "key",
+                        "description": "The Key",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "val",
+                        "description": "The Value",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sig",
+                        "description": "signature of a message consisted tk_key_value",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} models.KVObject.Key"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/publickv/remove": {
+            "get": {
+                "tags": [
+                    "publickv"
+                ],
+                "description": "find key-value by key",
+                "operationId": "BigsetKVController.Remove",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "sessionID",
+                        "description": "Session ID of user/app",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "appID",
+                        "description": "appID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "keys",
+                        "description": "the keys of kv you want to get, saparated by comma,",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{deletedKeys} []string"
+                    },
+                    "403": {
+                        "description": ": empty object"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.KVObject": {
+            "title": "KVObject",
+            "type": "object",
+            "properties": {
+                "Key": {
+                    "type": "string"
+                },
+                "Value": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "publickv",
+            "description": "Operations about simplekv\n"
+        }
+    ]
+}
