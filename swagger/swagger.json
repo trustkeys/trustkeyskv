@@ -151,7 +151,7 @@
                     {
                         "in": "query",
                         "name": "sig",
-                        "description": "signature of a message consisted tk_key_value",
+                        "description": "signature of a message = TrustKeys: + pubKey + appID + Key + Value",
                         "required": true,
                         "type": "string"
                     }
