@@ -15,60 +15,18 @@
     },
     "basePath": "/v1",
     "paths": {
-        "/publickv/": {
-            "post": {
-                "tags": [
-                    "publickv"
-                ],
-                "description": "Put key-value to cloud",
-                "operationId": "BigsetKVController.Post",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "sessionID",
-                        "description": "Session ID",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "appID",
-                        "description": "App ID",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "The KVObject content",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.KVObject"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "{string} models.KVObject.Key"
-                    },
-                    "403": {
-                        "description": "body is empty"
-                    }
-                }
-            }
-        },
         "/publickv/get": {
             "get": {
                 "tags": [
                     "publickv"
                 ],
                 "description": "find key-value by key",
-                "operationId": "BigsetKVController.Get",
+                "operationId": "PublicKVController.Get",
                 "parameters": [
                     {
                         "in": "query",
-                        "name": "sessionID",
-                        "description": "Session ID of user/app",
+                        "name": "pubKey",
+                        "description": "Public Key of a user",
                         "required": true,
                         "type": "string"
                     },
@@ -89,50 +47,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "{simplekv} models.KVObject"
-                    },
-                    "403": {
-                        "description": ": empty object"
-                    }
-                }
-            }
-        },
-        "/publickv/multiget": {
-            "get": {
-                "tags": [
-                    "publickv"
-                ],
-                "description": "find key-value by key",
-                "operationId": "BigsetKVController.MultiGet",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "sessionID",
-                        "description": "Session ID of user/app",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "appID",
-                        "description": "appID",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "keys",
-                        "description": "the keys of kv you want to get, saparated by comma,",
-                        "required": true,
-                        "type": "array",
-                        "items": {
-                            "type": "string"
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.KVObject"
                         }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "{bigsetkv} []models.KVObject"
                     },
                     "403": {
                         "description": ": empty object"
@@ -146,7 +64,7 @@
                     "publickv"
                 ],
                 "description": "Put key-value to cloud",
-                "operationId": "BigsetKVController.PutItem",
+                "operationId": "PublicKVController.PutItem",
                 "parameters": [
                     {
                         "in": "path",
@@ -186,53 +104,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "{string} models.KVObject.Key"
+                        "description": "{map[string]string} map[string]string"
                     },
                     "403": {
                         "description": "body is empty"
-                    }
-                }
-            }
-        },
-        "/publickv/remove": {
-            "get": {
-                "tags": [
-                    "publickv"
-                ],
-                "description": "find key-value by key",
-                "operationId": "BigsetKVController.Remove",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "sessionID",
-                        "description": "Session ID of user/app",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "appID",
-                        "description": "appID",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "keys",
-                        "description": "the keys of kv you want to get, saparated by comma,",
-                        "required": true,
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "{deletedKeys} []string"
-                    },
-                    "403": {
-                        "description": ": empty object"
                     }
                 }
             }
@@ -246,6 +121,9 @@
                 "Key": {
                     "type": "string"
                 },
+                "TransactionID": {
+                    "type": "string"
+                },
                 "Value": {
                     "type": "string"
                 }
@@ -255,7 +133,7 @@
     "tags": [
         {
             "name": "publickv",
-            "description": "Operations about simplekv\n"
+            "description": "Operations about Public Key-value store\n"
         }
     ]
 }

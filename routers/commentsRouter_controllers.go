@@ -7,16 +7,7 @@ import (
 
 func init() {
 
-    beego.GlobalControllerRouter["github.com/trustkeys/trustkeyskv/controllers:BigsetKVController"] = append(beego.GlobalControllerRouter["github.com/trustkeys/trustkeyskv/controllers:BigsetKVController"],
-        beego.ControllerComments{
-            Method: "Post",
-            Router: `/`,
-            AllowHTTPMethods: []string{"post"},
-            MethodParams: param.Make(),
-            Filters: nil,
-            Params: nil})
-
-    beego.GlobalControllerRouter["github.com/trustkeys/trustkeyskv/controllers:BigsetKVController"] = append(beego.GlobalControllerRouter["github.com/trustkeys/trustkeyskv/controllers:BigsetKVController"],
+    beego.GlobalControllerRouter["github.com/trustkeys/trustkeyskv/controllers:PublicKVController"] = append(beego.GlobalControllerRouter["github.com/trustkeys/trustkeyskv/controllers:PublicKVController"],
         beego.ControllerComments{
             Method: "Get",
             Router: `/get`,
@@ -25,16 +16,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["github.com/trustkeys/trustkeyskv/controllers:BigsetKVController"] = append(beego.GlobalControllerRouter["github.com/trustkeys/trustkeyskv/controllers:BigsetKVController"],
-        beego.ControllerComments{
-            Method: "MultiGet",
-            Router: `/multiget`,
-            AllowHTTPMethods: []string{"get"},
-            MethodParams: param.Make(),
-            Filters: nil,
-            Params: nil})
-
-    beego.GlobalControllerRouter["github.com/trustkeys/trustkeyskv/controllers:BigsetKVController"] = append(beego.GlobalControllerRouter["github.com/trustkeys/trustkeyskv/controllers:BigsetKVController"],
+    beego.GlobalControllerRouter["github.com/trustkeys/trustkeyskv/controllers:PublicKVController"] = append(beego.GlobalControllerRouter["github.com/trustkeys/trustkeyskv/controllers:PublicKVController"],
         beego.ControllerComments{
             Method: "PutItem",
             Router: `/putitem/:appID/:pubKey`,
@@ -43,15 +25,6 @@ func init() {
 				param.New("pubKey", param.IsRequired, param.InPath),
 				param.New("appID", param.IsRequired, param.InPath),
 			),
-            Filters: nil,
-            Params: nil})
-
-    beego.GlobalControllerRouter["github.com/trustkeys/trustkeyskv/controllers:BigsetKVController"] = append(beego.GlobalControllerRouter["github.com/trustkeys/trustkeyskv/controllers:BigsetKVController"],
-        beego.ControllerComments{
-            Method: "Remove",
-            Router: `/remove`,
-            AllowHTTPMethods: []string{"get"},
-            MethodParams: param.Make(),
             Filters: nil,
             Params: nil})
 

@@ -17,10 +17,10 @@ func init() {
 	ns := beego.NewNamespace("/v1",
 		beego.NSNamespace("/publickv",
 			beego.NSInclude(
-				&controllers.BigsetKVController{},
+				&controllers.PublicKVController{},
 			),
 		),
-
 	)
 	beego.AddNamespace(ns)
 }
+
