@@ -31,7 +31,7 @@ var GetMessage = util.GetMessage
 // @Param	appID		path 	string	true		"App ID"
 // @Param	key		query  	string	true		"The Key"
 // @Param	val		query  	string	true		"The Value"
-// @Param 	sig		query 	string 	true 	"signature of a message consisted tk_key_value "
+// @Param 	sig		query 	string 	true 	"signature of a message = "TrustKeys:" + pubKey + appID + Key + Value "
 // @Success 200 {map[string]string} map[string]string
 // @Failure 403 body is empty
 // @router /putitem/:appID/:pubKey [post]
