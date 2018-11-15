@@ -1,10 +1,10 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Simple KV API",
-        "description": "beego has a very cool tools to autogenerate documents for your API and SimpleKV used it",
+        "title": "Public Key-value store for trustkeys.network",
+        "description": "An awesome key-value store for mobile application that verify ECDSA digital signature with secp256k1",
         "version": "1.0.0",
-        "termsOfService": "https://123xe.vn/cms/dieukhoan",
+        "termsOfService": "https://kvpublic.trustkeys.network/swagger/",
         "contact": {
             "email": "thanhnt@123xe.vn"
         },
