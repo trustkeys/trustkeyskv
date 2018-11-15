@@ -1,1 +1,1 @@
-GOPATH=~/go/ ~/go/bin/bee generate docs
+GOPATH=~/go/ ~/go/bin/bee generate  docs

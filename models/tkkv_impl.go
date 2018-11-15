@@ -11,18 +11,21 @@ import(
 
 func NewTrustKeysKVAcceptAllModel(host, port string ) TrustKeysKVModelIf{
 	return &SimpleTKKVModel{
-		KeyAvailable: acceptAllPubKey,
+		KeyAvailable: acceptAll,
+		AppAvailable: acceptAll,
 		DataBSHost : host,
 		DataBSPort : port,
 	}
 }
 
-type CheckWhiteListPubKey func(string) bool ;
+type CheckWhiteList func(string) bool ;
 
 /*SimpleTKKVModel with bigset */
 type SimpleTKKVModel struct  {
 	//function to check if a public key is enabled to store data
-	KeyAvailable CheckWhiteListPubKey
+	KeyAvailable CheckWhiteList
+
+	AppAvailable CheckWhiteList
 
 	// Big set host/port for storing data
 	DataBSHost string
@@ -34,7 +37,7 @@ func (o* SimpleTKKVModel) getDataBSClient() *thriftpool.ThriftSocketClient{
 }
 
 
-func acceptAllPubKey(string) bool {
+func acceptAll(string) bool {
 	return true;
 }
 
@@ -74,6 +77,17 @@ func (o* internalValue) fromString(str string) bool {
 
 
 func (o *SimpleTKKVModel) Put(appID, pubKey, key, value string) (ok bool, oldValue, transctionID string ) {
+	if o.KeyAvailable != nil &&  !o.KeyAvailable(pubKey) {
+		fmt.Println("Public key is no available to write in the system")
+		ok = false;
+		return;
+	}
+
+	if o.AppAvailable != nil && !o.AppAvailable(appID) {
+		ok = false;
+		return ;
+	}
+
 	bskey := makeKey(pubKey, key);
 	testObj := &internalValue{Value:" this is my value ", TransID: "this is transiid"}
 	fmt.Println("testOBJ json: ", testObj.toString() );
@@ -87,7 +101,9 @@ func (o *SimpleTKKVModel) Put(appID, pubKey, key, value string) (ok bool, oldVal
 		if aRes !=nil && aRes.Error == bs.TErrorCode_EGood && Err == nil {
 			ok = true;
 			if aRes.IsSetOldItem() {
-				oldValue = string(aRes.GetOldItem().Value)
+				aTmp := &internalValue{};
+				aTmp.fromBytes(aRes.GetOldItem().Value );
+				oldValue = aTmp.Value //string(aRes.GetOldItem().Value)
 				transctionID = "To be added later"
 				return; 
 			} 
@@ -119,4 +135,34 @@ func (o *SimpleTKKVModel) Get(appID, pubKey, key string ) (ok bool, value, laste
 	ok = false;
 	return
 
+}
+
+
+func (o *SimpleTKKVModel) GetSlice(appID, pubKey, fromKey string, maxNum int32 ) (kv []KVObject, err error) {
+
+	bskey := makeKey(pubKey, fromKey);
+	// pub into bigset : appID , bsKey , value 
+	aClient := o.getDataBSClient();
+	if aClient != nil {
+		defer aClient.BackToPool();
+		//aRes, Err := aClient.Client.(*bs.TStringBigSetKVServiceClient).BsGetItem(context.Background(), bs.TStringKey(appID), bs.TItemKey(bskey))
+		aRes, Err := aClient.Client.(*bs.TStringBigSetKVServiceClient).BsGetSliceFromItem(context.Background(), bs.TStringKey(appID), 
+																							bs.TItemKey(bskey), maxNum );
+
+		if Err == nil {
+			if aRes.IsSetItems() {
+				for _, item := range aRes.GetItems().Items {
+					v:=&internalValue{};
+					v.fromBytes(item.Value)
+					kv = append(kv, KVObject{Key: string(item.Key), Value: v.Value })
+				}
+				return
+			}
+			
+		} else {
+			err = Err
+		}
+
+	}
+	return;
 }

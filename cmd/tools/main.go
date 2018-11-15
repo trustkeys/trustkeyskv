@@ -17,10 +17,6 @@ var (
 	kegenText = ""
 )
 
-func GetMessage(pubKey, appID, Key,Value string ) string {
-	return "TrustKeys:" + pubKey + appID + Key + Value;
-}
-
 func main(){
 	// if len(os.Args) > 1 {
 	// 	fmt.Println("Sender Key:", os.Args[1])
@@ -46,7 +42,7 @@ func main(){
 
 	fmt.Println("Public key: ", pubKey);
 	
-	aMsg := GetMessage(pubKey, appID, key, value );
+	aMsg := util.GetMessage(pubKey, appID, key, value );
 	sig, err := crypto.Sign( util.Hash256(aMsg), privKey )
 
 	sigHex  := hex.EncodeToString(sig);

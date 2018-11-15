@@ -67,7 +67,7 @@ func (o *PublicKVController) PutItem(pubKey, appID string) {
 		o.Data["json"] = aMap;
 
 	} else {
-		o.Data["json"] = map[string]string{"Key":key , "errCode": "-1", "desc": "Invalid signature "}
+		o.Data["json"] = map[string]string{"Key":key , "errCode": "-1", "desc": "Invalid signature!"}
 	}
 
 	o.ServeJSON()
@@ -110,6 +110,57 @@ func (o *PublicKVController) Get() {
 		
 	}
 	o.Data["json"] = aMap;
+
+	o.ServeJSON()
+}
+
+// @Title GetSliceFrom
+// @Description find key-value by key
+// @Param	pubKey		query 	string	true		"Public Key of a user"
+// @Param	appID		query 	string	true		"appID"
+// @Param	fromKey		query 	string	true		"the key of kv you want to get"
+// @Param	maxNum		query 	int	true		"Maximum number of items to get"
+// @Success 200 {array} []models.KVObject
+// @Failure 403 : empty object
+// @router /GetSliceFrom/:appID/:pubKey [get]
+func (o *PublicKVController) GetSliceFrom(pubKey, appID string) {
+	// pubKey := o.GetString("pubKey")
+	// appID := o.GetString("appID")
+	fromKey := o.GetString("fromKey") //o.Ctx.Input.Param(":key")
+	maxNum, _ := o.GetInt32("maxNum")
+	fmt.Println("appID: ", appID, " pubKey: ", pubKey, " fromKey: ", fromKey);
+
+	// fmt.Printf("pubKey: %s, appID: %s, key: %s",pubKey , appID , key)
+	// var aMap = map[string]string{"Key":key }
+
+	if tkPublicModel != nil {
+
+		// ok, value, lastestTrans := tkPublicModel.Get(appID, pubKey, key)
+		// if ok {
+		// 	// aMap["errCode"] = "0";
+		// 	// aMap["value"] = value;
+		// 	// aMap["lastestTransactionID"] = lastestTrans
+		// 	o.Data["json"] = &models.KVObject{
+		// 		Key:key, 
+		// 		Value: value,
+		// 		TransactionID : lastestTrans,
+		// 	}
+		// 	o.ServeJSON();
+		// 	return;
+		// } else {
+		// 	aMap["errCode"] = "-1";
+		// 	aMap["desc"] = "Model error or empty data"
+		// }
+		kvs , err := tkPublicModel.GetSlice(appID, pubKey, fromKey, maxNum);
+		if err == nil {
+			o.Data["json"] = kvs;
+		} else {
+			o.Data["json"] = map[string]string{"errCode":"-1" , "desc" : "error get slice"}
+		}
+		
+		
+	}
+	// o.Data["json"] = aMap;
 
 	o.ServeJSON()
 }

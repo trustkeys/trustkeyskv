@@ -15,6 +15,60 @@
     },
     "basePath": "/v1",
     "paths": {
+        "/publickv/GetSliceFrom/{appID}/{pubKey}": {
+            "get": {
+                "tags": [
+                    "publickv"
+                ],
+                "description": "find key-value by key",
+                "operationId": "PublicKVController.GetSliceFrom",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "pubKey",
+                        "description": "Public Key of a user",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "appID",
+                        "description": "appID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fromKey",
+                        "description": "the key of kv you want to get",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "maxNum",
+                        "description": "Maximum number of items to get",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.KVObject"
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": ": empty object"
+                    }
+                }
+            }
+        },
         "/publickv/get": {
             "get": {
                 "tags": [
