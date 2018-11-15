@@ -1,0 +1,27 @@
+Wed Mar 07 01:44:22 2018
+Executing: node server.js --type=tcp --protocol=binary --transport=framed --ssl --port=37857
+Directory: /data/data/src/cpp/hcore2017/contribs/ApacheThrift/thrift-0.11.0/lib/nodejs/test
+config:delay: 5
+config:timeout: 13
+===============================================================================
+module.js:471
+    throw err;
+    ^
+
+Error: Cannot find module 'node-int64'
+    at Function.Module._resolveFilename (module.js:469:15)
+    at Function.Module._load (module.js:417:25)
+    at Module.require (module.js:497:17)
+    at require (internal/module.js:20:19)
+    at Object.<anonymous> (/data/data/src/cpp/hcore2017/contribs/ApacheThrift/thrift-0.11.0/lib/nodejs/lib/thrift/binary_protocol.js:22:13)
+    at Module._compile (module.js:570:32)
+    at Object.Module._extensions..js (module.js:579:10)
+    at Module.load (module.js:487:32)
+    at tryModuleLoad (module.js:446:12)
+    at Function.Module._load (module.js:438:3)
+
+*** Server process has died unexpectedly ***
+===============================================================================
+Process is killed.
+Test execution took 0.5 seconds.
+Wed Mar 07 01:44:23 2018

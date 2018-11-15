@@ -1,0 +1,16 @@
+Wed Mar 07 01:45:13 2018
+Executing: perl -Igen-perl/ -I../../lib/perl/lib/ TestServer.pl --cert=../keys/server.crt --key=../keys/server.key --protocol=binary --transport=framed --port=36153
+Directory: /data/data/src/cpp/hcore2017/contribs/ApacheThrift/thrift-0.11.0/test/perl
+config:delay: 5
+config:timeout: 9
+===============================================================================
+Can't locate Bit/Vector.pm in @INC (you may need to install the Bit::Vector module) (@INC contains: gen-perl ../../lib/perl/lib gen-perl/ ../../lib/perl/lib/ /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.24.1 /usr/local/share/perl/5.24.1 /usr/lib/x86_64-linux-gnu/perl5/5.24 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl/5.24 /usr/share/perl/5.24 /usr/local/lib/site_perl /usr/lib/x86_64-linux-gnu/perl-base) at ../../lib/perl/lib/Thrift/BinaryProtocol.pm line 24.
+BEGIN failed--compilation aborted at ../../lib/perl/lib/Thrift/BinaryProtocol.pm line 24.
+Compilation failed in require at TestServer.pl line 33.
+BEGIN failed--compilation aborted at TestServer.pl line 33.
+
+*** Server process has died unexpectedly ***
+===============================================================================
+Process is killed.
+Test execution took 0.1 seconds.
+Wed Mar 07 01:45:13 2018

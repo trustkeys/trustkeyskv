@@ -1,0 +1,16 @@
+Wed Mar 07 01:44:39 2018
+Executing: /data/data/src/cpp/hcore2017/contribs/ApacheThrift/thrift-0.11.0/test/py/TestServer.py --verbose --genpydir=gen-py --protocol=accelc --transport=buffered --port=43655 TSimpleServer
+Directory: /data/data/src/cpp/hcore2017/contribs/ApacheThrift/thrift-0.11.0/test/py
+config:delay: 5
+config:timeout: 10
+===============================================================================
+Traceback (most recent call last):
+  File "/data/data/src/cpp/hcore2017/contribs/ApacheThrift/thrift-0.11.0/test/py/TestServer.py", line 305, in <module>
+    from ThriftTest import ThriftTest
+ImportError: No module named ThriftTest
+
+*** Server process has died unexpectedly ***
+===============================================================================
+Process is killed.
+Test execution took 0.1 seconds.
+Wed Mar 07 01:44:39 2018

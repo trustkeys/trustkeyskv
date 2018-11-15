@@ -1,0 +1,20 @@
+Wed Mar 07 01:40:00 2018
+Executing: ant -f build.xml -Dno-gen-thrift="" -Dtestargs --protocol=multi --transport=framed --ssl --port=44699 run-testserver
+Directory: /data/data/src/cpp/hcore2017/contribs/ApacheThrift/thrift-0.11.0/lib/java
+config:delay: 10
+config:timeout: 5
+===============================================================================
+Buildfile: /data/data/src/cpp/hcore2017/contribs/ApacheThrift/thrift-0.11.0/lib/java/build.xml
+
+run-testserver:
+
+BUILD FAILED
+/data/data/src/cpp/hcore2017/contribs/ApacheThrift/thrift-0.11.0/lib/java/build.xml:247: /data/data/src/cpp/hcore2017/contribs/ApacheThrift/thrift-0.11.0/lib/java/build/lib does not exist.
+
+Total time: 1 second
+
+*** Server process has died unexpectedly ***
+===============================================================================
+Process is killed.
+Test execution took 2.1 seconds.
+Wed Mar 07 01:40:02 2018

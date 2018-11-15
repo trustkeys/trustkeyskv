@@ -1,0 +1,6 @@
+Wed Mar 07 01:45:14 2018
+Executing: erl +K true -noshell -pa ../../lib/erl/ebin/ -pa ./ebin -s test_thrift_server -extra --protocol=compact --transport=buffered --ssl --port=42739
+Directory: /data/data/src/cpp/hcore2017/contribs/ApacheThrift/thrift-0.11.0/test/erl
+config:delay: 5
+config:timeout: 8
+===============================================================================

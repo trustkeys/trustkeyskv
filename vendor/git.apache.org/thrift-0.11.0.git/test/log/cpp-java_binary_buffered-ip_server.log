@@ -1,0 +1,6 @@
+Wed Mar 07 01:45:04 2018
+Executing: TestServer --protocol=binary --transport=buffered --port=45753
+Directory: /data/data/src/cpp/hcore2017/contribs/ApacheThrift/thrift-0.11.0/test/cpp
+config:delay: 5
+config:timeout: 13
+===============================================================================
