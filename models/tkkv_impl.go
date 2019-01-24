@@ -45,6 +45,11 @@ func makeKey(pubKey, key string) []byte {
 	return []byte (pubKey + ":" + key);
 }
 
+func keyFromLongKey(pubKey string, longKey []byte) string{
+	aLen := len(pubKey) + 1;
+	return string(longKey[aLen:])
+}
+
 type internalValue struct {
 	Value string `json:value`
 	TransID string `json:trans`
@@ -154,7 +159,8 @@ func (o *SimpleTKKVModel) GetSlice(appID, pubKey, fromKey string, maxNum int32 )
 				for _, item := range aRes.GetItems().Items {
 					v:=&internalValue{};
 					v.fromBytes(item.Value)
-					kv = append(kv, KVObject{Key: string(item.Key), Value: v.Value })
+					// kv = append(kv, KVObject{Key: string(item.Key), Value: v.Value })
+					kv = append(kv, KVObject{Key: keyFromLongKey(pubKey, item.Key), Value: v.Value })
 				}
 				return
 			}

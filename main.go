@@ -14,15 +14,6 @@ import (
 
 
 func InitWithBSHostPort(bsHost, bsPort string) {
-	// ns := beego.NewNamespace("/v1",
-	// 	beego.NSNamespace("/publickv",
-	// 		beego.NSInclude(
-	// 			controllers.NewPublicKVController( models.NewTrustKeysKVAcceptAllModel(bsHost, bsPort) ),
-	// 		),
-	// 	),
-
-	// )
-	// beego.AddNamespace(ns)
 	controllers.SetPublicModel(models.NewTrustKeysKVAcceptAllModel(bsHost, bsPort) )
 }
 
@@ -34,7 +25,6 @@ func main() {
 	}
 	appconfig.InitConfig()
 	InitWithBSHostPort(appconfig.BIGSETKV_HOST, strconv.Itoa(appconfig.BIGSETKV_PORT) )
-	// controllers.ConfigSetBSHostPort(appconfig.BIGSETKV_HOST, strconv.Itoa(appconfig.BIGSETKV_PORT) )
 	
 	os.Setenv("HOST", appconfig.RunningHost)
 	os.Setenv("PORT", appconfig.ListenPort)
