@@ -46,6 +46,13 @@ func makeKey(pubKey, key string) []byte {
 }
 
 func keyFromLongKey(pubKey string, longKey []byte) string{
+	if len(longKey) < len(pubKey) + 1 {
+		return "";
+	}
+	if pubKey != string(longKey[:len(pubKey)]) {
+		return "";
+	}
+	
 	aLen := len(pubKey) + 1;
 	return string(longKey[aLen:])
 }

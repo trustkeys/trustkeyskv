@@ -44,10 +44,10 @@ func InitWithBSHostPort(bsHost, bsPort string) {
 
 
 func main() {
-	if beego.BConfig.RunMode == "dev" {
+	// if beego.BConfig.RunMode == "dev" {
 		beego.BConfig.WebConfig.DirectoryIndex = true
 		beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
-	}
+	// }
 	appconfig.InitConfig()
 	InitWithBSHostPort(appconfig.BIGSETKV_HOST, strconv.Itoa(appconfig.BIGSETKV_PORT) )
 	
